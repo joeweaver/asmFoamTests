@@ -1,0 +1,60 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+defaultFieldValues
+(
+    volScalarFieldValue alpha.air 1
+    volScalarFieldValue alpha.water 0
+    volScalarFieldValue p_rgh 0
+    volScalarFieldValue SND 0
+    volScalarFieldValue SNH 0
+    volScalarFieldValue SNO 0
+    volScalarFieldValue SO  0
+    volScalarFieldValue SS  0
+    volScalarFieldValue XBA 0
+    volScalarFieldValue XBH 0
+    volScalarFieldValue XND 0
+    volScalarFieldValue XP  0
+    volScalarFieldValue XS  0
+);
+
+regions
+(
+    boxToCell
+    {
+        box (0 0 -0.1) (0.15 0.9 0.1);
+        fieldValues
+        (
+            volScalarFieldValue alpha.air 0
+            volScalarFieldValue alpha.water 1
+            volScalarFieldValue p_rgh 8829
+            volScalarFieldValue SND 0.006
+            volScalarFieldValue SNH 0.060
+            volScalarFieldValue SNO 0.001
+            volScalarFieldValue SO  0.0005
+            volScalarFieldValue SS  0.580
+            volScalarFieldValue XBA 0.050
+            volScalarFieldValue XBH 0.500
+            volScalarFieldValue XND 0.015
+            volScalarFieldValue XP  0.040
+            volScalarFieldValue XS  0.360
+        );
+    }
+);
+
+
+// ************************************************************************* //
