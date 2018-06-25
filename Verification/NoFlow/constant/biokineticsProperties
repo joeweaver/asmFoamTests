@@ -17,11 +17,11 @@ FoamFile
 
 stoichiometry
 {
-    YA          YA  [0 0 0 0 0 0 0] 0.24;
-    YH          YH  [0 0 0 0 0 0 0] 0.67;
-    fP          fP  [0 0 0 0 0 0 0] 0.08;
-    iXB         iXB [0 0 0 0 0 0 0] 0.086;
-    iXP         iXP [0 0 0 0 0 0 0] 0.06;
+    YA     0.24;
+    YH     0.67;
+    fP     0.08;
+    iXB    0.086;
+    iXP    0.06;
 }
 
 kinetics
