@@ -32,8 +32,6 @@ divSchemes
     "div\(phir,alpha.*,alpha.*\)"   Gauss interfaceCompression 1;
     "div\(alphaPhi.*,U.*\)"         Gauss limitedLinearV 1;
     "div\(alphaPhi.*,S.*\)"         Gauss limitedLinear 1;
-    "div\(coeff.*,S.*\)"            Gauss limitedLinear 1;
-    "div\(coeff.*,X.*\)"            Gauss limitedLinear 1;
     "div\(alphaPhi.*,X.*\)"         Gauss limitedLinear 1;
     div(Rc)                         Gauss linear;
     "div\(phi.*,U.*\)"              Gauss limitedLinearV 1;
@@ -43,7 +41,12 @@ divSchemes
 
 laplacianSchemes
 {
-    default         Gauss linear corrected;
+    default                         Gauss linear corrected;
+    "laplacian\(rAUf,.*\)"          Gauss linear corrected;
+    laplacian(DkEff,k)              Gauss linear corrected;
+    laplacian(DomegaEff,omega)      Gauss linear corrected;
+    "laplacian\(\(alpha.*,U.*\)"    Gauss linear corrected;
+    "laplacian\(.*,(S|X).*\)"       Gauss linear corrected;
 }
 
 interpolationSchemes
