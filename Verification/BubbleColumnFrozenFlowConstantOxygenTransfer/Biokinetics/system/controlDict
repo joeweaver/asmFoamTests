@@ -1,0 +1,85 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     asmFoam;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         432000;
+
+deltaT          10.0;
+
+writeControl    adjustableRunTime;
+
+writeInterval   2000;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression uncompressed;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable yes;
+
+adjustTimeStep  no;
+
+maxCo           1;
+
+maxDeltaT       1;
+
+functions
+{
+    asmFieldAverages
+    {
+        type            volFieldValue;
+        libs            ("libfieldFunctionObjects.so");
+
+        writeControl    writeTime;
+        writeFields     false;
+
+        regionType      all;
+        operation       weightedVolAverage;
+        weightField     alpha.water;
+
+        fields
+        (
+            SS
+            XS
+            XBH
+            XBA
+            XP
+            SO
+            SNO
+            SNH
+            SND
+            XND
+        );
+    }
+}
+
+
+// ************************************************************************* //
