@@ -17,29 +17,42 @@ FoamFile
 
 ddtSchemes
 {
-    default         backward;
+    default         Euler;
 }
 
 gradSchemes
 {
     default         Gauss linear;
+    "grad\(S.*\)"   cellMDLimited leastSquares 1;
+    "grad\(X.*\)"   cellMDLimited leastSquares 1;
 }
 
 divSchemes
 {
     default                         none;
-    "div\(phi,alpha.*\)"            Gauss vanLeer;
-    "div\(phir,alpha.*,alpha.*\)"   Gauss vanLeer;
-    "div\(alphaPhi.*,U.*\)"         Gauss limitedLinearV 1;
-    "div\(alphaPhi.*,S.*\)"          Gauss limitedLinear 1;
-    "div\(alphaPhi.*,X.*\)"          Gauss limitedLinear 1;
-    div(Rc)                         Gauss linear;
+
+    div(phi,alpha.air)              Gauss vanLeer;
+    div(phir,alpha.air)             Gauss vanLeer;
+
+    "div\(alphaRhoPhi.*,U.*\)"      Gauss limitedLinearV 1;
     "div\(phi.*,U.*\)"              Gauss limitedLinearV 1;
+
+    "div\(alphaRhoPhi.*,(h|e).*\)"  Gauss limitedLinear 1;
+    "div\(alphaRhoPhi.*,K.*\)"      Gauss limitedLinear 1;
+    "div\(alphaPhi.*,p\)"           Gauss limitedLinear 1;
+
+    "div\(alphaRhoPhi.*,(k|epsilon).*\)"  Gauss limitedLinear 1;
+    "div\(phim,(k|epsilon)m\)"      Gauss limitedLinear 1;
+
+    "div\(\(\(\(alpha.*\*thermo:rho.*\)\*nuEff.*\)\*dev2\(T\(grad\(U.*\)\)\)\)\)" Gauss linear;
+
+    "div\(alphaPhi.*,S.*\)"         Gauss linearUpwind "grad\S(.*\)";
+    "div\(alphaPhi.*,X.*\)"         Gauss linearUpwind "grad\X(.*\)";
 }
 
 laplacianSchemes
 {
-    default         Gauss linear corrected;
+    default         Gauss linear uncorrected;
 }
 
 interpolationSchemes
@@ -49,7 +62,8 @@ interpolationSchemes
 
 snGradSchemes
 {
-    default         corrected;
+    default         uncorrected;
 }
+
 
 // ************************************************************************* //
